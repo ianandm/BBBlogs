@@ -88,8 +88,8 @@ export default async function Home() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-3xl font-bold mb-8">Featured</h2>
               <article className="card overflow-hidden hover:shadow-lg transition">
-                <Link href={`/blog/${featuredBlog.slug}`} className="block">
-                  <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Link href={`/blog/${featuredBlog.slug}`} className="block">
                     {featuredBlog.featuredImage && (
                       <div className="relative h-64 md:h-96 overflow-hidden rounded-lg">
                         <img
@@ -99,39 +99,39 @@ export default async function Home() {
                         />
                       </div>
                     )}
-                    <div className="p-6 flex flex-col justify-between">
-                      {featuredBlog.category && (
-                        <Link
-                          href={`/category/${featuredBlog.category.slug}`}
-                          className="inline-block w-fit text-sm font-semibold text-[var(--color-accent)] uppercase tracking-wider mb-3 hover:text-[var(--color-accent-light)]"
-                        >
-                          {featuredBlog.category.name}
-                        </Link>
+                  </Link>
+                  <div className="p-6 flex flex-col justify-between">
+                    {featuredBlog.category && (
+                      <Link
+                        href={`/category/${featuredBlog.category.slug}`}
+                        className="inline-block w-fit text-sm font-semibold text-[var(--color-accent)] uppercase tracking-wider mb-3 hover:text-[var(--color-accent-light)]"
+                      >
+                        {featuredBlog.category.name}
+                      </Link>
+                    )}
+                    <Link href={`/blog/${featuredBlog.slug}`}>
+                      <h3 className="text-3xl font-bold mb-3">{featuredBlog.title}</h3>
+                      <p className="text-lg text-[var(--color-text-secondary)] mb-4">
+                        {featuredBlog.subtitle || featuredBlog.excerpt}
+                      </p>
+                    </Link>
+                    <div className="meta">
+                      {featuredBlog.author?.name && (
+                        <span>{featuredBlog.author.name}</span>
                       )}
-                      <div>
-                        <h3 className="text-3xl font-bold mb-3">{featuredBlog.title}</h3>
-                        <p className="text-lg text-[var(--color-text-secondary)] mb-4">
-                          {featuredBlog.subtitle || featuredBlog.excerpt}
-                        </p>
-                      </div>
-                      <div className="meta">
-                        {featuredBlog.author?.name && (
-                          <span>{featuredBlog.author.name}</span>
-                        )}
-                        {featuredBlog.author?.name && (
+                      {featuredBlog.author?.name && (
+                        <span className="meta-divider"></span>
+                      )}
+                      <span>{formatDate(featuredBlog.publishedAt)}</span>
+                      {featuredBlog.readingTime && (
+                        <>
                           <span className="meta-divider"></span>
-                        )}
-                        <span>{formatDate(featuredBlog.publishedAt)}</span>
-                        {featuredBlog.readingTime && (
-                          <>
-                            <span className="meta-divider"></span>
-                            <span>{featuredBlog.readingTime} min read</span>
-                          </>
-                        )}
-                      </div>
+                          <span>{featuredBlog.readingTime} min read</span>
+                        </>
+                      )}
                     </div>
                   </div>
-                </Link>
+                </div>
               </article>
             </div>
           </section>
@@ -144,11 +144,8 @@ export default async function Home() {
             {latestBlogs.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {latestBlogs.map((blog) => (
-                  <article
-                    key={blog.id}
-                    className="card overflow-hidden hover:shadow-lg transition flex flex-col"
-                  >
-                    <Link href={`/blog/${blog.slug}`} className="flex flex-col h-full">
+                  <article key={blog.id} className="card overflow-hidden hover:shadow-lg transition flex flex-col">
+                    <Link href={`/blog/${blog.slug}`} className="block">
                       {blog.featuredImage && (
                         <div className="relative h-48 overflow-hidden">
                           <img
@@ -158,32 +155,34 @@ export default async function Home() {
                           />
                         </div>
                       )}
-                      <div className="p-6 flex flex-col flex-1">
-                        {blog.category && (
-                          <Link
-                            href={`/category/${blog.category.slug}`}
-                            className="inline-block w-fit text-xs font-semibold text-[var(--color-accent)] uppercase tracking-wider mb-2 hover:text-[var(--color-accent-light)]"
-                          >
-                            {blog.category.name}
-                          </Link>
-                        )}
+                    </Link>
+                    <div className="p-6 flex flex-col flex-1">
+                      {blog.category && (
+                        <Link
+                          href={`/category/${blog.category.slug}`}
+                          className="inline-block w-fit text-xs font-semibold text-[var(--color-accent)] uppercase tracking-wider mb-2 hover:text-[var(--color-accent-light)]"
+                        >
+                          {blog.category.name}
+                        </Link>
+                      )}
+                      <Link href={`/blog/${blog.slug}`}>
                         <h3 className="text-xl font-bold mb-2 hover:text-[var(--color-primary)]">
                           {blog.title}
                         </h3>
                         <p className="text-sm text-[var(--color-text-secondary)] mb-4 flex-grow">
                           {blog.excerpt}
                         </p>
-                        <div className="meta text-xs">
-                          <span>{formatDate(blog.publishedAt)}</span>
-                          {blog.readingTime && (
-                            <>
-                              <span className="meta-divider"></span>
-                              <span>{blog.readingTime} min</span>
-                            </>
-                          )}
-                        </div>
+                      </Link>
+                      <div className="meta text-xs">
+                        <span>{formatDate(blog.publishedAt)}</span>
+                        {blog.readingTime && (
+                          <>
+                            <span className="meta-divider"></span>
+                            <span>{blog.readingTime} min</span>
+                          </>
+                        )}
                       </div>
-                    </Link>
+                    </div>
                   </article>
                 ))}
               </div>
