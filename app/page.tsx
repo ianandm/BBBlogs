@@ -87,9 +87,9 @@ export default async function Home() {
           <section id="featured" className="py-12 md:py-16 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-3xl font-bold mb-8">Featured</h2>
-              <article className="card overflow-hidden hover:shadow-lg transition">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="order-2 md:order-1 p-6 flex flex-col justify-between text-left">
+              <article className="card mx-0 max-w-md overflow-hidden hover:shadow-lg transition">
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="order-1 p-6 flex flex-col justify-between text-left">
                     {featuredBlog.category && (
                       <Link
                         href={`/category/${featuredBlog.category.slug}`}
@@ -120,7 +120,7 @@ export default async function Home() {
                       )}
                     </div>
                   </div>
-                  <Link href={`/blog/${featuredBlog.slug}`} className="order-1 block md:order-2">
+                  <Link href={`/blog/${featuredBlog.slug}`} className="order-2 block">
                     {featuredBlog.featuredImage && (
                       <div className="relative h-64 md:h-96 overflow-hidden rounded-lg">
                         <img
