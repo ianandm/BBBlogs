@@ -9,8 +9,14 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      <div className="bg-[var(--color-primary)] px-4 py-2 text-center text-sm font-medium text-white">
-        Final destination for seekers of Bhakti Yoga
+      <div className="bg-[var(--color-primary)] px-4 text-sm font-medium text-white">
+        <div className="mx-auto grid min-h-10 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <span aria-hidden="true" />
+          <span className="text-center">Final destination for seekers of Bhakti Yoga</span>
+          <Link href="/" className="justify-self-end text-sm font-semibold underline-offset-4 hover:underline" style={{ color: '#fff' }}>
+            ← Home
+          </Link>
+        </div>
       </div>
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <section className="max-w-3xl">
@@ -22,9 +28,6 @@ export default function AboutPage() {
             Bluish Boy is a place for seekers to explore the timeless wisdom of
             Bhakti Yoga and Vedic literature, one thoughtful step at a time.
           </p>
-          <Link href="/" className="btn btn-primary">
-            Back to Home
-          </Link>
         </section>
       </main>
       <footer className="mt-auto border-t border-[var(--color-border)] bg-white">
