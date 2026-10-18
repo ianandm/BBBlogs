@@ -115,10 +115,6 @@ export default function ReadingPathsPage() {
     <div className="reading-paths">
       <div className="rp-announcement">Final destination for seekers of Bhakti Yoga</div>
       <main>
-        <section className="rp-masthead" aria-label="Bluish Boy in Vrindavan">
-          <img src="/BBVrindavanNew.png" alt="Vrindavan riverside temples at sunset" />
-          <div aria-hidden="true" />
-        </section>
         <section className="rp-hero" aria-labelledby="reading-paths-title">
           <div className="rp-container">
             <p className="rp-eyebrow">Curated for your journey</p>
