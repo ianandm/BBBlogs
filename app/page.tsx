@@ -38,7 +38,6 @@ async function getBlogs(): Promise<Blog[]> {
         featuredImage: true,
       },
       orderBy: { publishedAt: 'desc' },
-      take: 12,
     })
     return blogs.map((blog) => ({
       id: blog.id,
@@ -69,11 +68,10 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
       <div className="bg-[var(--color-primary)] px-4 py-2 text-sm font-medium text-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3">
-          <span aria-hidden="true" />
-          <span className="text-center">Final destination for seekers of Bhakti Yoga</span>
-          <Link href="/reading-paths" className="justify-self-end text-white underline-offset-4 hover:text-white hover:underline">
-            Reading Paths
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
+          <span>Final destination for seekers of Bhakti Yoga</span>
+          <Link href="/about" className="shrink-0 text-white underline-offset-4 hover:text-white hover:underline">
+            About
           </Link>
         </div>
       </div>
