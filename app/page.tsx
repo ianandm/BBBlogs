@@ -82,6 +82,20 @@ export default async function Home() {
           <div className="border-t border-[#49A4BB]" />
         </section>
 
+        <section className="border-b border-[var(--color-border)] bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+            <div>
+              <h2 className="text-2xl font-bold mb-2">Find your next step</h2>
+              <p className="text-[var(--color-text-secondary)] mb-0">
+                Explore guided reading paths through Vedic and Bhakti literature.
+              </p>
+            </div>
+            <Link href="/reading-paths" className="btn btn-primary w-full sm:w-auto shrink-0">
+              Explore Reading Paths <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </section>
+
         {/* Featured Article */}
         {featuredBlog && (
           <section id="featured" className="py-12 md:py-16 bg-white">
