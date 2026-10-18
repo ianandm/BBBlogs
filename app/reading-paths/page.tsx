@@ -115,14 +115,6 @@ export default function ReadingPathsPage() {
     <div className="reading-paths">
       <div className="rp-announcement">Final destination for seekers of Bhakti Yoga</div>
       <main>
-        <section className="rp-hero" aria-labelledby="reading-paths-title">
-          <div className="rp-container">
-            <p className="rp-eyebrow">Curated for your journey</p>
-            <h1 id="reading-paths-title">Reading Paths</h1>
-            <p className="rp-intro">Not sure where to begin or what to read next? Our reading paths offer a structured, week-by-week journey through the texts that matter most.</p>
-          </div>
-        </section>
-
         <section className="rp-section" aria-labelledby="choose-path-title">
           <div className="rp-container">
             <div className="rp-section-heading">

@@ -59,33 +59,12 @@
   border-top: 1px solid #49A4BB;
 }
 
-.rp-hero {
-  padding-block: 3rem;
-  background: #fff;
-}
-
-.rp-eyebrow,
 .rp-kicker {
   color: var(--rp-teal);
   font-size: .75rem;
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
-}
-
-.rp-hero h1 {
-  margin: .4rem 0 1rem;
-  color: var(--rp-text);
-  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
-  font-size: clamp(2.25rem, 4vw, 3rem);
-  line-height: 1.12;
-}
-
-.rp-intro {
-  max-width: 700px;
-  margin: 0;
-  color: var(--rp-muted);
-  font-size: 1.08rem;
 }
 
 .rp-section {
