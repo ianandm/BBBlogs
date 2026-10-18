@@ -68,8 +68,14 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      <div className="bg-[var(--color-primary)] px-4 py-2 text-center text-sm font-medium text-white">
-        Final destination for seekers of Bhakti Yoga
+      <div className="bg-[var(--color-primary)] px-4 py-2 text-sm font-medium text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <span aria-hidden="true" />
+          <span className="text-center">Final destination for seekers of Bhakti Yoga</span>
+          <Link href="/reading-paths" className="justify-self-end text-white underline-offset-4 hover:text-white hover:underline">
+            Reading Paths
+          </Link>
+        </div>
       </div>
       <main>
         {/* Hero Banner */}

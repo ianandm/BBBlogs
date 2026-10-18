@@ -113,7 +113,13 @@ export default function ReadingPathsPage() {
 
   return (
     <div className="reading-paths">
-      <div className="rp-announcement">Final destination for seekers of Bhakti Yoga</div>
+      <div className="rp-announcement">
+        <div className="rp-announcement-inner">
+          <span className="rp-home-spacer" aria-hidden="true" />
+          <span>Final destination for seekers of Bhakti Yoga</span>
+          <Link href="/" className="rp-home-link">← Home</Link>
+        </div>
+      </div>
       <main>
         <section className="rp-section" aria-labelledby="choose-path-title">
           <div className="rp-container">
