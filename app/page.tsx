@@ -30,7 +30,6 @@ async function getBlogs(): Promise<Blog[]> {
     const blogs = await prisma.blog.findMany({
       where: {
         status: 'PUBLISHED',
-        showOnHomepage: true,
       },
       include: {
         author: true,
