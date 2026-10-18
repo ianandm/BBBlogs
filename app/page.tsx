@@ -70,7 +70,7 @@ export default async function Home() {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
           <span>Final destination for seekers of Bhakti Yoga</span>
           <Link href="/about" className="shrink-0 text-white underline-offset-4 hover:text-white hover:underline">
-            About
+            About us
           </Link>
         </div>
       </div>
