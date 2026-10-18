@@ -85,6 +85,15 @@ export default async function Home() {
           <div className="border-t border-[#49A4BB]" />
         </section>
 
+        <section className="bg-white px-4 py-10 text-center sm:py-12">
+          <h1 className="mx-auto mb-3 max-w-4xl text-3xl font-bold leading-tight md:text-5xl">
+            Your Journey Back to Krishna Begins Here
+          </h1>
+          <p className="mx-auto mb-0 max-w-3xl text-lg text-[var(--color-text-secondary)]">
+            Bhakti Yoga, Bhagavad Gita and Vedic wisdom, explained simply for every seeker.
+          </p>
+        </section>
+
         <section className="border-b border-[var(--color-border)] bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
             <div>
