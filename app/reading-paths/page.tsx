@@ -116,7 +116,7 @@ export default function ReadingPathsPage() {
       <div className="rp-announcement">
         <div className="rp-announcement-inner">
           <span className="rp-home-spacer" aria-hidden="true" />
-          <span>Final destination for seekers of Bhakti Yoga</span>
+          <span>Your Journey Back to Krishna Begins Here</span>
           <Link href="/" className="rp-home-link">← Home</Link>
         </div>
       </div>

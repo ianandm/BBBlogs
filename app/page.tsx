@@ -68,7 +68,7 @@ export default async function Home() {
     <div className="min-h-screen bg-[var(--color-bg)]">
       <div className="bg-[var(--color-primary)] px-4 py-2 text-sm font-medium text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
-          <span>Final destination for seekers of Bhakti Yoga</span>
+          <span>Your Journey Back to Krishna Begins Here</span>
           <Link href="/about" className="shrink-0 underline-offset-4 hover:underline" style={{ color: '#fff' }}>
             About us
           </Link>

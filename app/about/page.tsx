@@ -12,7 +12,7 @@ export default function AboutPage() {
       <div className="bg-[var(--color-primary)] px-4 text-sm font-medium text-white">
         <div className="mx-auto grid min-h-10 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3">
           <span aria-hidden="true" />
-          <span className="text-center">Final destination for seekers of Bhakti Yoga</span>
+          <span className="text-center">Your Journey Back to Krishna Begins Here</span>
           <Link href="/" className="justify-self-end text-sm font-semibold underline-offset-4 hover:underline" style={{ color: '#fff' }}>
             ← Home
           </Link>
