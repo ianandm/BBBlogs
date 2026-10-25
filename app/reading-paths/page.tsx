@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { startTransition, useEffect, useRef, useState } from 'react'
-import './reading-paths.css'
+import { startTransition, useEffect, useState } from 'react'
 
 type ReadingPlan = {
   id: string
@@ -17,11 +16,11 @@ type ReadingPlan = {
 }
 
 const starterPaths = [
-  { level: 'Beginner', title: 'New to Bhakti', description: 'A gentle introduction to devotional practice and philosophy', books: 8, duration: '2–3 months' },
-  { level: 'Intermediate', title: 'Build Inner Strength', description: 'Develop resilience through spiritual wisdom and practice', books: 12, duration: '3–4 months' },
-  { level: 'All Ages', title: 'Stories for Children', description: 'Sacred narratives that inspire young minds', books: 15, duration: 'Ongoing' },
-  { level: 'All Levels', title: 'Gita for Daily Life', description: 'Apply timeless teachings to modern challenges', books: 10, duration: '4–6 months' },
-  { level: 'Advanced', title: 'Devotional Deep Dive', description: 'Immerse yourself in advanced bhakti practices', books: 20, duration: '6–12 months' },
+  { level: 'Beginner', title: 'New to Bhakti', description: 'A gentle introduction to devotional practice and philosophy', books: 8, duration: '2–3 months', href: '/reading-paths/new-to-bhakti' },
+  { level: 'Intermediate', title: 'Build Inner Strength', description: 'Develop resilience through spiritual wisdom and practice', books: 12, duration: '3–4 months', href: '#devotion-bhakti' },
+  { level: 'All Ages', title: 'Stories for Children', description: 'Sacred narratives that inspire young minds', books: 15, duration: 'Ongoing', href: '#family-children' },
+  { level: 'All Levels', title: 'Gita for Daily Life', description: 'Apply timeless teachings to modern challenges', books: 10, duration: '4–6 months', href: '#leadership-purpose' },
+  { level: 'Advanced', title: 'Devotional Deep Dive', description: 'Immerse yourself in advanced bhakti practices', books: 20, duration: '6–12 months', href: '#devotion-bhakti' },
 ]
 
 const plans: ReadingPlan[] = [
@@ -78,8 +77,6 @@ type SavedProgress = Record<string, boolean[]>
 
 export default function ReadingPathsPage() {
   const [progress, setProgress] = useState<SavedProgress>({})
-  const [selectedPath, setSelectedPath] = useState('')
-  const dialogRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
     try {
@@ -104,11 +101,6 @@ export default function ReadingPathsPage() {
       }
       return next
     })
-  }
-
-  function closeDialog() {
-    dialogRef.current?.close()
-    setSelectedPath('')
   }
 
   return (
@@ -139,12 +131,9 @@ export default function ReadingPathsPage() {
                     <span>⏱ {path.duration}</span>
                     <span>{path.level}</span>
                   </div>
-                  <button className="rp-button" type="button" onClick={() => {
-                    setSelectedPath(path.title)
-                    dialogRef.current?.showModal()
-                  }}>
+                  <Link className="rp-button" href={path.href}>
                     Start Path <span aria-hidden="true">→</span>
-                  </button>
+                  </Link>
                 </article>
               ))}
             </div>
@@ -162,7 +151,7 @@ export default function ReadingPathsPage() {
               {plans.map((plan) => {
                 const completed = plan.steps.reduce((count, _, index) => count + (progress[plan.id]?.[index] ? 1 : 0), 0)
                 return (
-                  <article className="rp-plan" key={plan.id}>
+                  <article className="rp-plan" id={plan.id} key={plan.id}>
                     <div className="rp-plan-aside">
                       <span className="rp-level">{plan.level} · {plan.duration} · {plan.bookCount} books</span>
                       <h3>{plan.title}</h3>
@@ -221,28 +210,6 @@ export default function ReadingPathsPage() {
         </div>
       </footer>
 
-      <dialog
-        className="rp-dialog"
-        ref={dialogRef}
-        aria-labelledby="rp-dialog-title"
-        onClick={(event) => { if (event.target === dialogRef.current) closeDialog() }}
-        onClose={() => setSelectedPath('')}
-      >
-        <div className="rp-dialog-content">
-          <div className="rp-dialog-header">
-            <div>
-              <span className="rp-kicker">Your next step</span>
-              <h2 id="rp-dialog-title">Week-by-week plan coming soon</h2>
-            </div>
-            <button className="rp-close" type="button" aria-label="Close dialog" onClick={closeDialog}>×</button>
-          </div>
-          <p>A detailed plan for {selectedPath || 'this path'} is in the works. In the meantime, explore the guided plans below.</p>
-          <div className="rp-dialog-actions">
-            <a className="rp-button" href="#training-plans" onClick={closeDialog}>View detailed plans</a>
-            <button className="rp-button rp-button-secondary" type="button" onClick={closeDialog}>Keep exploring</button>
-          </div>
-        </div>
-      </dialog>
     </div>
   )
 }

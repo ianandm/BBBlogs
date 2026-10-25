@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import './reading-paths.css'
 
 export const metadata: Metadata = {
   title: 'Reading Paths | Bluish Boy',
