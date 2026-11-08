@@ -70,6 +70,7 @@ export async function PUT(
     const body = await request.json()
     const {
       title,
+      slug,
       subtitle,
       excerpt,
       content,
@@ -78,6 +79,8 @@ export async function PUT(
       status,
       seoTitle,
       seoDescription,
+      seoPrimaryKeyword,
+      seoRelatedKeywords,
       canonicalUrl,
       showOnHomepage,
       tagIds = [],
@@ -95,6 +98,18 @@ export async function PUT(
       )
     }
 
+    const updatedSlug = typeof slug === 'string' ? generateSlug(slug) : blog.slug
+    if (!updatedSlug) {
+      return NextResponse.json({ error: 'A valid slug is required' }, { status: 400 })
+    }
+
+    if (updatedSlug !== blog.slug) {
+      const conflictingBlog = await prisma.blog.findUnique({ where: { slug: updatedSlug } })
+      if (conflictingBlog) {
+        return NextResponse.json({ error: 'That URL slug is already in use' }, { status: 409 })
+      }
+    }
+
     const readingTime = content ? calculateReadingTime(content) : blog.readingTime
 
     // Update blog
@@ -102,6 +117,7 @@ export async function PUT(
       where: { id },
       data: {
         title,
+        slug: updatedSlug,
         subtitle,
         excerpt,
         content,
@@ -110,6 +126,8 @@ export async function PUT(
         status,
         seoTitle,
         seoDescription,
+        seoPrimaryKeyword,
+        seoRelatedKeywords,
         canonicalUrl,
         ...(typeof showOnHomepage === 'boolean' && { showOnHomepage }),
         readingTime,

@@ -4,13 +4,15 @@ import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/db'
 import { formatDate } from '@/lib/utils'
 
+const previousSpiritualitySlug = 'what-is-spirituality-a-simple-bhagavad-gita-guide-to-a-meaningful-life'
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const blog = await prisma.blog.findUnique({
+  const blog = (await prisma.blog.findUnique({
     where: { slug },
     select: {
       title: true,
@@ -18,17 +20,39 @@ export async function generateMetadata({
       status: true,
       seoTitle: true,
       seoDescription: true,
+      seoPrimaryKeyword: true,
+      seoRelatedKeywords: true,
       canonicalUrl: true,
     },
-  })
+  })) ?? (slug === 'what-is-spirituality'
+    ? await prisma.blog.findUnique({
+        where: { slug: previousSpiritualitySlug },
+        select: {
+          title: true,
+          excerpt: true,
+          status: true,
+          seoTitle: true,
+          seoDescription: true,
+          seoPrimaryKeyword: true,
+          seoRelatedKeywords: true,
+          canonicalUrl: true,
+        },
+      })
+    : null)
 
   if (!blog || blog.status !== 'PUBLISHED') {
     return { title: 'Article not found' }
   }
 
+  const keywords = [
+    blog.seoPrimaryKeyword,
+    ...(blog.seoRelatedKeywords?.split(',').map((keyword) => keyword.trim()) || []),
+  ].filter((keyword): keyword is string => Boolean(keyword))
+
   return {
     title: blog.seoTitle || blog.title,
     description: blog.seoDescription || blog.excerpt || undefined,
+    ...(keywords.length > 0 && { keywords }),
     ...(blog.canonicalUrl && { alternates: { canonical: blog.canonicalUrl } }),
   }
 }
@@ -39,10 +63,15 @@ export default async function PublicBlogPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const blog = await prisma.blog.findUnique({
+  const blog = (await prisma.blog.findUnique({
     where: { slug },
     include: { author: true, category: true, featuredImage: true },
-  })
+  })) ?? (slug === 'what-is-spirituality'
+    ? await prisma.blog.findUnique({
+        where: { slug: previousSpiritualitySlug },
+        include: { author: true, category: true, featuredImage: true },
+      })
+    : null)
 
   if (!blog || blog.status !== 'PUBLISHED') {
     notFound()

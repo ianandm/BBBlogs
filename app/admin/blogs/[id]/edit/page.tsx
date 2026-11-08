@@ -13,8 +13,14 @@ export default function EditBlogPage() {
   const imageInputRef = useRef<HTMLInputElement>(null)
   const [categories, setCategories] = useState<Category[]>([])
   const [title, setTitle] = useState('')
+  const [slug, setSlug] = useState('')
   const [subtitle, setSubtitle] = useState('')
   const [excerpt, setExcerpt] = useState('')
+  const [seoTitle, setSeoTitle] = useState('')
+  const [seoDescription, setSeoDescription] = useState('')
+  const [seoPrimaryKeyword, setSeoPrimaryKeyword] = useState('')
+  const [seoRelatedKeywords, setSeoRelatedKeywords] = useState('')
+  const [canonicalUrl, setCanonicalUrl] = useState('')
   const [content, setContent] = useState('')
   const [categoryId, setCategoryId] = useState('')
   const [showOnHomepage, setShowOnHomepage] = useState(true)
@@ -29,8 +35,14 @@ export default function EditBlogPage() {
         if (!blogResponse.ok) throw new Error('Unable to load blog')
         const blog = await blogResponse.json()
         setTitle(blog.title)
+        setSlug(blog.slug || '')
         setSubtitle(blog.subtitle || '')
         setExcerpt(blog.excerpt || '')
+        setSeoTitle(blog.seoTitle || '')
+        setSeoDescription(blog.seoDescription || '')
+        setSeoPrimaryKeyword(blog.seoPrimaryKeyword || '')
+        setSeoRelatedKeywords(blog.seoRelatedKeywords || '')
+        setCanonicalUrl(blog.canonicalUrl || '')
         setContent(blog.content)
         setCategoryId(blog.categoryId || '')
         setShowOnHomepage(blog.showOnHomepage !== false)
@@ -72,7 +84,7 @@ export default function EditBlogPage() {
       const response = await fetch(`/api/admin/blogs/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, subtitle, excerpt, content, categoryId: categoryId || null, status, showOnHomepage }),
+        body: JSON.stringify({ title, slug, subtitle, excerpt, content, categoryId: categoryId || null, status, showOnHomepage, seoTitle, seoDescription, seoPrimaryKeyword, seoRelatedKeywords, canonicalUrl: canonicalUrl || null }),
       })
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || 'Unable to save blog')
@@ -90,8 +102,14 @@ export default function EditBlogPage() {
         <h1 className="text-3xl font-bold mt-3 mb-8">Edit Blog</h1>
         <form onSubmit={saveBlog} className="card p-6 space-y-5">
           <label className="block">Title<input required value={title} onChange={(event) => setTitle(event.target.value)} className="input mt-2 w-full" /></label>
+          <label className="block">URL slug<input required value={slug} onChange={(event) => setSlug(event.target.value)} className="input mt-2 w-full" /></label>
           <label className="block">Subtitle<input value={subtitle} onChange={(event) => setSubtitle(event.target.value)} className="input mt-2 w-full" /></label>
           <label className="block">Excerpt<textarea value={excerpt} onChange={(event) => setExcerpt(event.target.value)} className="input mt-2 w-full" rows={3} /></label>
+          <label className="block">SEO title<input value={seoTitle} onChange={(event) => setSeoTitle(event.target.value)} className="input mt-2 w-full" /></label>
+          <label className="block">Meta description<textarea value={seoDescription} onChange={(event) => setSeoDescription(event.target.value)} className="input mt-2 w-full" rows={3} /></label>
+          <label className="block">Primary keyword<input value={seoPrimaryKeyword} onChange={(event) => setSeoPrimaryKeyword(event.target.value)} className="input mt-2 w-full" /></label>
+          <label className="block">Related keywords<input value={seoRelatedKeywords} onChange={(event) => setSeoRelatedKeywords(event.target.value)} className="input mt-2 w-full" placeholder="Separate keywords with commas" /></label>
+          <label className="block">Canonical URL<input type="url" value={canonicalUrl} onChange={(event) => setCanonicalUrl(event.target.value)} className="input mt-2 w-full" /></label>
           <label className="block">Category<select value={categoryId} onChange={(event) => setCategoryId(event.target.value)} className="input mt-2 w-full"><option value="">Select a category</option>{categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
           <label className="flex items-center gap-3"><input type="checkbox" checked={showOnHomepage} onChange={(event) => setShowOnHomepage(event.target.checked)} /> Show this blog on the homepage</label>
           <div>
