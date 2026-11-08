@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: '/blog/what-is-spirituality',
         permanent: true,
       },
+      {
+        source: '/blog/the-disease-of-envy',
+        destination: '/blog/overcoming-envy-through-devotional-service',
+        permanent: true,
+      },
     ]
   },
 };
