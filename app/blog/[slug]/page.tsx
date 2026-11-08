@@ -1,7 +1,37 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/db'
 import { formatDate } from '@/lib/utils'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const blog = await prisma.blog.findUnique({
+    where: { slug },
+    select: {
+      title: true,
+      excerpt: true,
+      status: true,
+      seoTitle: true,
+      seoDescription: true,
+      canonicalUrl: true,
+    },
+  })
+
+  if (!blog || blog.status !== 'PUBLISHED') {
+    return { title: 'Article not found' }
+  }
+
+  return {
+    title: blog.seoTitle || blog.title,
+    description: blog.seoDescription || blog.excerpt || undefined,
+    ...(blog.canonicalUrl && { alternates: { canonical: blog.canonicalUrl } }),
+  }
+}
 
 export default async function PublicBlogPage({
   params,
