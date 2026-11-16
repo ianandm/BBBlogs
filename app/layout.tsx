@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Bluish Boy | Bhakti Yoga, Bhagavad Gita & Krishna Wisdom",
   description: "Explore Bhakti Yoga, the Bhagavad Gita and the Mahabharata through simple articles, children’s stories and guided reading paths. Wisdom for the journey.",
+  icons: {
+    icon: "/BB.png?v=2",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
